@@ -1,0 +1,21 @@
+---
+title: "STAT 380 Final"
+subtitle: "Spring 2019"
+author: "Ciara Virgo and Andrew Casey"
+date: "Due: 04/30/2019 11:59PM"
+output: html_notebook
+---
+
+
+
+# Front matter
+
+```{r}
+# always clean up R environment
+rm(list = ls())
+
+#loading packages
+
+#loading data
+
+```
