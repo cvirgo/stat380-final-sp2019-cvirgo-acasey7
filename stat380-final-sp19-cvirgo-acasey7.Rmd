@@ -18,7 +18,11 @@ output: html_notebook
 
 (A) .Rmd Line number(s) for join operation: 
 
-
+```{r}
+library(data.table)
+death <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
+heart <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv")
+```
 
 ### Data Wrangling (5 of 6 required)
 
