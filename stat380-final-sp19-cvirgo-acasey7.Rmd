@@ -20,8 +20,8 @@ output: html_notebook
 
 ```{r}
 library(data.table)
-death <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
-heart <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv")
+DeathData <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
+HeartData <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv")
 ```
 
 ### Data Wrangling (5 of 6 required)
@@ -29,7 +29,9 @@ heart <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv")
 *Description: Clear demonstration of proficiency should include proper use of 5 out of the following 6 topics from class: (+) general purpose data wrangling--e.g., filter, select mutate, summarise, arrange, group_by, etc. (+) spread & gather to stack/unstack variables (+) regular expressions (+) user-defined functions (+) loops and control flow (+) vectorized functions like the `apply` family, `purrr::map` or `dplyr::do`*
 
 (A) .Rmd Line number(s) for an example of general purpose data wrangling: 
+```{r}
 
+```
 
 (B) .Rmd Line number(s) for a spread & gather (or equivalent): 
 
