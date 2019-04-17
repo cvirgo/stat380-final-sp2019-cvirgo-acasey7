@@ -15,7 +15,7 @@ output: html_notebook
 rm(list = ls())
 
 #loading packages
-
+library(data.table)
 #loading data
 
 ```
