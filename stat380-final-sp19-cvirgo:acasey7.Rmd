@@ -17,5 +17,12 @@ rm(list = ls())
 #loading packages
 library(data.table)
 #loading data
-
+DeathData <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
+HeartData <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv")
 ```
+
+```{r}
+HDiseaseRows <- DeathData$`Cause of Death` == "Heart Disease"
+DeathData <- DeathData[HDiseaseRows,]
+```
+

@@ -247,19 +247,30 @@ $(document).ready(function () {
 <h1>Front matter</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBhbHdheXMgY2xlYW4gdXAgUiBlbnZpcm9ubWVudFxucm0obGlzdCA9IGxzKCkpXG5cbiNsb2FkaW5nIHBhY2thZ2VzXG5cbiNsb2FkaW5nIGRhdGFcblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBhbHdheXMgY2xlYW4gdXAgUiBlbnZpcm9ubWVudFxucm0obGlzdCA9IGxzKCkpXG5cbiNsb2FkaW5nIHBhY2thZ2VzXG5saWJyYXJ5KGRhdGEudGFibGUpXG4jbG9hZGluZyBkYXRhXG5EZWF0aERhdGEgPC0gZnJlYWQoXCJOQ0hTXy1fUG90ZW50aWFsbHlfRXhjZXNzX0RlYXRoc19mcm9tX3RoZV9GaXZlX0xlYWRpbmdfQ2F1c2VzX29mX0RlYXRoLmNzdlwiKVxuSGVhcnREYXRhIDwtIGZyZWFkKFwiQmVoYXZpb3JhbF9SaXNrX0ZhY3Rvcl9EYXRhX19Ub2JhY2NvX1VzZV9fMjAxMF9BbmRfUHJpb3JfLmNzdlwiKVxuYGBgIn0= -->
 <pre class="r"><code># always clean up R environment
 rm(list = ls())
 
 #loading packages
-
+library(data.table)
 #loading data
-</code></pre>
+DeathData &lt;- fread(&quot;NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv&quot;)
+HeartData &lt;- fread(&quot;Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuSERpc2Vhc2VSb3dzIDwtIERlYXRoRGF0YSRgQ2F1c2Ugb2YgRGVhdGhgID09IFwiSGVhcnQgRGlzZWFzZVwiXG5EZWF0aERhdGEgPC0gRGVhdGhEYXRhW0hEaXNlYXNlUm93cyxdXG5gYGAifQ== -->
+<pre class="r"><code>HDiseaseRows &lt;- DeathData$`Cause of Death` == &quot;Heart Disease&quot;
+DeathData &lt;- DeathData[HDiseaseRows,]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAzODAgRmluYWwiCnN1YnRpdGxlOiAiU3ByaW5nIDIwMTkiCmF1dGhvcjogIkNpYXJhIFZpcmdvIGFuZCBBbmRyZXcgQ2FzZXkiCmRhdGU6ICJEdWU6IDA0LzMwLzIwMTkgMTE6NTlQTSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCgojIEZyb250IG1hdHRlcgoKYGBge3J9CiMgYWx3YXlzIGNsZWFuIHVwIFIgZW52aXJvbm1lbnQKcm0obGlzdCA9IGxzKCkpCgojbG9hZGluZyBwYWNrYWdlcwoKI2xvYWRpbmcgZGF0YQoKYGBg</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAzODAgRmluYWwiCnN1YnRpdGxlOiAiU3ByaW5nIDIwMTkiCmF1dGhvcjogIkNpYXJhIFZpcmdvIGFuZCBBbmRyZXcgQ2FzZXkiCmRhdGU6ICJEdWU6IDA0LzMwLzIwMTkgMTE6NTlQTSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCgojIEZyb250IG1hdHRlcgoKYGBge3J9CiMgYWx3YXlzIGNsZWFuIHVwIFIgZW52aXJvbm1lbnQKcm0obGlzdCA9IGxzKCkpCgojbG9hZGluZyBwYWNrYWdlcwpsaWJyYXJ5KGRhdGEudGFibGUpCiNsb2FkaW5nIGRhdGEKRGVhdGhEYXRhIDwtIGZyZWFkKCJOQ0hTXy1fUG90ZW50aWFsbHlfRXhjZXNzX0RlYXRoc19mcm9tX3RoZV9GaXZlX0xlYWRpbmdfQ2F1c2VzX29mX0RlYXRoLmNzdiIpCkhlYXJ0RGF0YSA8LSBmcmVhZCgiQmVoYXZpb3JhbF9SaXNrX0ZhY3Rvcl9EYXRhX19Ub2JhY2NvX1VzZV9fMjAxMF9BbmRfUHJpb3JfLmNzdiIpCmBgYAoKYGBge3J9CkhEaXNlYXNlUm93cyA8LSBEZWF0aERhdGEkYENhdXNlIG9mIERlYXRoYCA9PSAiSGVhcnQgRGlzZWFzZSIKRGVhdGhEYXRhIDwtIERlYXRoRGF0YVtIRGlzZWFzZVJvd3MsXQpgYGAKCg==</div>
 
 
 

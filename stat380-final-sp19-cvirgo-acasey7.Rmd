@@ -100,4 +100,3 @@ HeartData <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.cs
 - *Narrative quality* will be evaluated based on the written descriptions of your analysis, motivation, reasoning for each step, and conclusions in the final project report submission
 
 - *Extra credit* will be awarded if the final project report is submitted to Canvas as a URL to a functioning website hosting your analysis (not the URL of the GitHub Repo itself).
-
