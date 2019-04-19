@@ -24,6 +24,7 @@ rm(list = ls())
 
 # loading packages
 library(mdsr)
+library(tidyr)
 library(data.table)
 
 # loading in data
@@ -52,11 +53,10 @@ HeartData <-
   select(YEAR, LocationDesc, TopicType, TopicDesc, MeasureDesc, Sample_Size, Gender, Race, Age, Education) %>%
   setnames(old=c("YEAR","LocationDesc", "Age"), new=c("Year", "State", "Age Range"))
 ```
-  
 
 (B) .Rmd Line number(s) for a spread & gather (or equivalent): 
 
-- fixing up the HeartData set
+- use spread with heartdata
 
 (C) .Rmd Line number(s) for use of regular expressions: 
 
