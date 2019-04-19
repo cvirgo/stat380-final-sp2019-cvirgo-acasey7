@@ -18,23 +18,45 @@ output: html_notebook
 
 (A) .Rmd Line number(s) for join operation: 
 
-```{r}
+```{r echo=TRUE, message=FALSE}
+# always clean up R environment
+rm(list = ls())
+
+# loading packages
+library(mdsr)
 library(data.table)
-DeathData <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
-HeartData <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv")
+
+# loading in data
+Death_Raw <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
+Heart_Raw <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv")
 ```
+
 
 ### Data Wrangling (5 of 6 required)
 
 *Description: Clear demonstration of proficiency should include proper use of 5 out of the following 6 topics from class: (+) general purpose data wrangling--e.g., filter, select mutate, summarise, arrange, group_by, etc. (+) spread & gather to stack/unstack variables (+) regular expressions (+) user-defined functions (+) loops and control flow (+) vectorized functions like the `apply` family, `purrr::map` or `dplyr::do`*
 
 (A) .Rmd Line number(s) for an example of general purpose data wrangling: 
-```{r}
 
+- DeathData: year, cause of death (heart disease), state, age range
+- HeartData: year, location desc, topic type, topic desc, measure desc, sample size, gender, race, age, education
+
+```{r}
+DeathData <-
+  Death_Raw %>%
+  select(Year, `Cause of Death`, State, `Age Range`) %>%
+  filter(`Cause of Death` == "Heart Disease")
+
+HeartData <-
+  Heart_Raw %>%
+  select(YEAR, LocationDesc, TopicType, TopicDesc, MeasureDesc, Sample_Size, Gender, Race, Age, Education) %>%
+  setnames(old=c("YEAR","LocationDesc", "Age"), new=c("Year", "State", "Age Range"))
 ```
+  
 
 (B) .Rmd Line number(s) for a spread & gather (or equivalent): 
 
+- fixing up the HeartData set
 
 (C) .Rmd Line number(s) for use of regular expressions: 
 
@@ -47,6 +69,8 @@ HeartData <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.cs
 
 (F) .Rmd Line number(s) for use of vectorized functions: 
 
+- pulling the heartdisease rows from HeartData
+
 
 ### Data Visualization (all 4 required)
 
@@ -57,11 +81,12 @@ HeartData <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.cs
 
 (B) .Rmd Line number(s) for visualization displaying many--3 or more--variables (A, B, C, & D must be four **different** plots): 
 
+- x-axis (year), y-axis (number of people), by state, graphed: heart disease, smoking
 
 (C) .Rmd Line number(s) for a third visualization: 
 
 
-(D) .Rmd Line number(s) for a third visualization: 
+(D) .Rmd Line number(s) for a fourth visualization: 
 
 
 
