@@ -37,6 +37,10 @@ Heart_Raw <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.cs
 *Description: Clear demonstration of proficiency should include proper use of 5 out of the following 6 topics from class: (+) general purpose data wrangling--e.g., filter, select mutate, summarise, arrange, group_by, etc. (+) spread & gather to stack/unstack variables (+) regular expressions (+) user-defined functions (+) loops and control flow (+) vectorized functions like the `apply` family, `purrr::map` or `dplyr::do`*
 
 (A) .Rmd Line number(s) for an example of general purpose data wrangling: 
+
+- DeathData: year, cause of death (heart disease), state, age range
+- HeartData: year, location desc, topic type, topic desc, measure desc, sample size, gender, race, age, education
+
 ```{r}
 
 ```
