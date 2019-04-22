@@ -42,7 +42,17 @@ Heart_Raw <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.cs
 - HeartData: year, location desc, topic type, topic desc, measure desc, sample size, gender, race, age, education
 
 ```{r}
+DeathData <-
+  Death_Raw %>%
+  select(Year, `Cause of Death`, State, `Age Range`) %>%
+  filter(`Cause of Death` == "Heart Disease") %>%
+  filter(State %in% c("Pennsylvania", "Texas", "Washington"))
 
+HeartData <-
+  Heart_Raw %>%
+  select(YEAR, LocationDesc, TopicType, TopicDesc, MeasureDesc, Sample_Size, Gender, Race, Age, Education) %>%
+  setnames(old=c("YEAR","LocationDesc", "Age"), new=c("Year", "State", "Age Range")) %>%
+    filter(State %in% c("Pennsylvania", "Texas", "Washington"))
 ```
 
 (B) .Rmd Line number(s) for a spread & gather (or equivalent): 
