@@ -7,7 +7,7 @@ output: html_notebook
 
 # Purpose
 
-*This document is required to indicate where various requirements can be found within your Final Project Report Rmd.  You must* **indicate line numbers as they appear in your final Rmd document** *accompanying each of the following required tasks. Points will be deducted if line numbers are missing or differ signficantly from the submitted Final Rmd document.*  
+*This document is required to indicate where various requirements can be found within your Final Project Report Rmd.  You must* **indicate line numbers as they appear in your final Rmd document** *accompanying each of the following required tasks. Points will be deducted if line numbers are missing or differ signficantly from the submitted Final Rmd document.*
 
 
 # Final Project Requirements
@@ -47,13 +47,26 @@ DeathData <-
   Death_Raw %>%
   select(Year, `Cause of Death`, State, `Age Range`) %>%
   filter(`Cause of Death` == "Heart Disease") %>%
-  filter(State %in% c("Pennsylvania", "Texas", "Washington"))
+  filter(State %in% c("Pennsylvania"))
 
 HeartData <-
   Heart_Raw %>%
   select(YEAR, LocationDesc, TopicType, TopicDesc, MeasureDesc, Sample_Size, Gender, Race, Age, Education) %>%
   setnames(old=c("YEAR","LocationDesc", "Age"), new=c("Year", "State", "Age Range")) %>%
-    filter(State %in% c("Pennsylvania", "Texas", "Washington"))
+    filter(State %in% c("Pennsylvania"))
+
+Rows1 <- HeartData$Gender=="Overall"
+HeartData <- HeartData[Rows1,]
+
+Rows2 <- HeartData$`Age Range`=="All Ages"
+HeartData <- HeartData[Rows2==FALSE,]
+
+Rows3 <- HeartData$Education=="All Grades"
+HeartData <- HeartData[Rows3,]
+
+HeartData <-
+  HeartData %>%
+  select(-c(7,8,10))
 ```
 
 (B) .Rmd Line number(s) for a spread & gather (or equivalent): 
