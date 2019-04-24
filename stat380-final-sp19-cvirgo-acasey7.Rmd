@@ -63,7 +63,9 @@ HeartData <- HeartData[Rows2==FALSE,]
 Rows3 <- HeartData$Education=="All Grades"
 HeartData <- HeartData[Rows3,]
 
-HeartData
+HeartData <-
+  HeartData %>%
+  select(-c(7,8,10))
 ```
 
 (B) .Rmd Line number(s) for a spread & gather (or equivalent): 
