@@ -28,6 +28,7 @@ library(tidyr)
 library(data.table)
 library(stringr)
 library(dplyr)
+library(ggplot2)
 library(klaR)
 
 # loading in data
@@ -88,6 +89,17 @@ Age <- Heart_age$`Age Range`
 ```
 
 (C) .Rmd Line number(s) for use of regular expressions: 
+
+```{r}
+Heart_age <- 
+  HeartData %>%
+  select(`Age Range`)
+
+head(grep("[18]", Heart_age, value = TRUE))
+```
+
+(D) .Rmd Line number(s) for use of user-defined functions: 
+
 ```{r}
 CasestoRows <- function(HeartData){
   Year <- vector()
@@ -107,22 +119,11 @@ CasestoRows <- function(HeartData){
   df <- data.frame(Year, State, TopicType, TopicDesc, MeasureDesc, AgeRange)
   return(df)
 }
-Heart <- CasestoRows(HeartData)
+
+HeartData <- CasestoRows(HeartData)
 ```
-
-```{r}
-Heart_age <- 
-  HeartData %>%
-  select(`Age Range`)
-
-head(grep("[18]", Heart_age, value = TRUE))
-```
-
-(D) .Rmd Line number(s) for use of user-defined functions: 
-
 
 (E) .Rmd Line number(s) for use of loops and/or control flow: 
-
 
 (F) .Rmd Line number(s) for use of vectorized functions: 
 
@@ -137,6 +138,8 @@ head(grep("[18]", Heart_age, value = TRUE))
 
 ```{r}
 # x = year, y = # of people with heart disease by tobacco use
+
+
 ```
 
 (B) .Rmd Line number(s) for visualization displaying many--3 or more--variables (A, B, C, & D must be four **different** plots): 
