@@ -89,20 +89,24 @@ Age <- Heart_age$`Age Range`
 (C) .Rmd Line number(s) for use of regular expressions: 
 ```{r}
 CasestoRows <- function(HeartData){
-  df <- data.frame()
-  for (i in length(HeartData$`Age Range`)){
-    for (j in HeartData$Sample_Size[i]){
-      df$Year[j] <- HeartData$Year[i]
-      df$State[j] <- HeartData$State[i]
-      df$TopicType[j] <- HeartData$TopicType[i]
-      df$TopicDesc[j] <- HeartData$TopicDesc[i]
-      df$MeasureDesc[j] <- HeartData$MeasureDesc[i]
-      df$AgeRange[j] <- HeartData$`Age Range`[i]  
-    }
+  Year <- vector()
+  State <- vector()
+  TopicType <- vector()
+  TopicDesc <- vector()
+  MeasureDesc <- vector()
+  AgeRange <- vector()
+  for (i in 1:length(HeartData$Sample_Size)){
+    Year <- c(Year, rep(HeartData$Year[i], HeartData$Sample_Size[i]))
+    State <- c(State, rep(HeartData$State[i], HeartData$Sample_Size[i]))
+    TopicType <- c(TopicType, rep(HeartData$TopicType[i], HeartData$Sample_Size[i]))
+    TopicDesc <- c(TopicDesc, rep(HeartData$TopicDesc[i], HeartData$Sample_Size[i]))
+    MeasureDesc <- c(MeasureDesc, rep(HeartData$MeasureDesc[i], HeartData$Sample_Size[i]))
+    AgeRange <- c(AgeRange, rep(HeartData$`Age Range`[i], HeartData$Sample_Size[i]))
   }
+  df <- data.frame(Year, State, TopicType, TopicDesc, MeasureDesc, AgeRange)
   return(df)
 }
-CasestoRows(HeartData)
+Heart <- CasestoRows(HeartData)
 ```
 
 ```{r}
