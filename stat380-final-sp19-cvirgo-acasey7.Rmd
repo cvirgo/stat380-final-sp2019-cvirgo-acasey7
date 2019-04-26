@@ -91,7 +91,6 @@ Age <- Heart_age$`Age Range`
 (C) .Rmd Line number(s) for use of regular expressions: 
 
 ```{r}
-<<<<<<< HEAD
 for(i in 1:length(DeathData$`Age Range`)){
   if(DeathData$`Age Range`[i] == "0-49"){
     DeathData$`Age Range`[i] <- c("44 Years and Below")
@@ -128,17 +127,6 @@ for(i in 1:length(HeartData$`Age Range`)){
 }
 ```
 
-=======
-Heart_age <- 
-  HeartData %>%
-  select(`Age Range`)
-
-head(grep("[18]", Heart_age, value = TRUE))
-```
-
-(D) .Rmd Line number(s) for use of user-defined functions: 
-
->>>>>>> 78b9bc2becd5528708298698f6af972b5cf35dc0
 ```{r}
 CasestoRows <- function(HeartData){
   Year <- vector()
@@ -158,18 +146,18 @@ CasestoRows <- function(HeartData){
   df <- data.frame(Year, State, TopicType, TopicDesc, MeasureDesc, AgeRange)
   return(df)
 }
+Heart <- CasestoRows(HeartData)
+```
 
-<<<<<<< HEAD
 ```{r}
 Heart_age <- 
   HeartData %>%
-  dplyr::select(`Age Range`)
+  select(`Age Range`)
 
 head(grep("[18]", Heart_age, value = TRUE))
-=======
-HeartData <- CasestoRows(HeartData)
->>>>>>> 78b9bc2becd5528708298698f6af972b5cf35dc0
 ```
+
+(D) .Rmd Line number(s) for use of user-defined functions: 
 
 (E) .Rmd Line number(s) for use of loops and/or control flow: 
 
