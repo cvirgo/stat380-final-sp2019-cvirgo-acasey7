@@ -66,12 +66,32 @@ HeartData <- HeartData[Rows3,]
 HeartData <-
   HeartData %>%
   select(-c(7,8,10))
+
+HeartData$Sample_Size <- as.numeric(gsub(",", "", HeartData$Sample_Size))
+HeartData$Sample_Size <- as.numeric(as.character(HeartData$Sample_Size))
 ```
 
 (B) .Rmd Line number(s) for a spread & gather (or equivalent): 
 
 
 (C) .Rmd Line number(s) for use of regular expressions: 
+```{r}
+CasestoRows <- function(HeartData){
+  df <- data.frame()
+  for (i in length(HeartData$`Age Range`)){
+    for (j in HeartData$Sample_Size[i]){
+      df$Year[j] <- HeartData$Year[i]
+      df$State[j] <- HeartData$State[i]
+      df$TopicType[j] <- HeartData$TopicType[i]
+      df$TopicDesc[j] <- HeartData$TopicDesc[i]
+      df$MeasureDesc[j] <- HeartData$MeasureDesc[i]
+      df$AgeRange[j] <- HeartData$`Age Range`[i]  
+    }
+  }
+  return(df)
+}
+CasestoRows(HeartData)
+```
 
 
 (D) .Rmd Line number(s) for use of user-defined functions: 
