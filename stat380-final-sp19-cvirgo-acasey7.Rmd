@@ -29,6 +29,7 @@ library(data.table)
 library(stringr)
 library(dplyr)
 library(ggplot2)
+library(base)
 library(klaR)
 
 # loading in data
@@ -120,14 +121,12 @@ CasestoRows <- function(HeartData){
   return(df)
 }
 
-HeartData <- CasestoRows(HeartData)
+Heart <- CasestoRows(HeartData)
 ```
 
 (E) .Rmd Line number(s) for use of loops and/or control flow: 
 
 (F) .Rmd Line number(s) for use of vectorized functions: 
-
-- pulling the heartdisease rows from HeartData
 
 
 ### Data Visualization (all 4 required)
@@ -139,25 +138,37 @@ HeartData <- CasestoRows(HeartData)
 ```{r}
 # x = year, y = # of people with heart disease by tobacco use
 
+counts <- table(Heart$State)
+barplot(counts, main = "state", xlab = "State", ylab = "# of people who use Tobacco")
 
+ggplot(Heart, aes(x = State)) +
+  geom_histogram(stat = "count") +
+  geom_bar(aes(fill = State))
 ```
 
 (B) .Rmd Line number(s) for visualization displaying many--3 or more--variables (A, B, C, & D must be four **different** plots): 
 
 ```{r}
-# x = year, y = # of people with heart disease by tobacco use ** between all four states
+# x = year, y = # of people with heart disease  ** between all four states
 ```
 
 (C) .Rmd Line number(s) for a third visualization: 
 
 ```{r}
 # DeathData: x = Age Range, y = # of heart disease
+
+ggplot(DeathData, aes(x = State)) +
+  geom_histogram(stat = "count") 
 ```
 
 (D) .Rmd Line number(s) for a fourth visualization: 
 
 ```{r}
 #HeartData: x = year, y = multiple bar chart by state
+
+ggplot(Heart, aes(x = Year)) +
+  geom_histogram(stat = "count") +
+  geom_bar(data = DeathData, aes(fill = `Cause of Death`))
 ```
 
 
