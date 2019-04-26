@@ -27,6 +27,7 @@ library(mdsr)
 library(tidyr)
 library(data.table)
 library(stringr)
+library(dplyr)
 library(klaR)
 
 # loading in data
@@ -47,14 +48,14 @@ Heart_Raw <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.cs
 ```{r}
 DeathData <-
   Death_Raw %>%
-  select(Year, `Cause of Death`, State, `Age Range`) %>%
+  dplyr::select(Year, `Cause of Death`, State, `Age Range`) %>%
   filter(`Cause of Death` == "Heart Disease") %>%
   filter(State %in% c("Pennsylvania", "Texas", "Washington")) %>%
   filter(Year %in% c(2005, 2006, 2007, 2008, 2009, 2010))
 
 HeartData <-
   Heart_Raw %>%
-  select(YEAR, LocationDesc, TopicType, TopicDesc, MeasureDesc, Sample_Size, Gender, Race, Age, Education) %>%
+  dplyr::select(YEAR, LocationDesc, TopicType, TopicDesc, MeasureDesc, Sample_Size, Gender, Race, Age, Education) %>%
   setnames(old=c("YEAR","LocationDesc", "Age"), new=c("Year", "State", "Age Range")) %>%
   filter(State %in% c("Pennsylvania", "Texas", "Washington")) %>%
   filter(Year %in% c(2005, 2006, 2007, 2008, 2009, 2010))
@@ -70,7 +71,7 @@ HeartData <- HeartData[Rows3,]
 
 HeartData <-
   HeartData %>%
-  select(-c(7,8,10))
+  dplyr::select(-c(7,8,10))
 
 HeartData$Sample_Size <- as.numeric(gsub(",", "", HeartData$Sample_Size))
 HeartData$Sample_Size <- as.numeric(as.character(HeartData$Sample_Size))
