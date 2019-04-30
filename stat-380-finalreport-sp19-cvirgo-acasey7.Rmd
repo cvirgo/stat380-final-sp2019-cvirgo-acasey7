@@ -23,15 +23,20 @@ Death_Raw <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Cause
 Heart_Raw <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.csv")
 ```
 
+
+##Data Wrangling
+
 ```{r}
 #Filter the Smoking Data to narrow it down to 3 States and years common between the two data sets
 #Also remove all, but the necessary columns
 DeathData <-
   Death_Raw %>%
-  dplyr::select(Year, `Cause of Death`, State, `Age Range`) %>%
+  dplyr::select(Year, `Cause of Death`, State, `Age Range`, Locality, `Observed Deaths`, Benchmark) %>%
   filter(`Cause of Death` == "Heart Disease") %>%
   filter(State %in% c("Pennsylvania", "Texas", "Washington")) %>%
-  filter(Year %in% c(2005, 2006, 2007, 2008, 2009, 2010))
+  filter(Year %in% c(2005, 2006, 2007, 2008, 2009, 2010)) %>%
+  filter(Locality %in% c("Metropolitan", "Nonmetropolitan")) %>%
+  filter(Benchmark %in% c("2005 Fixed"))
 
 #Filter the Heart Disease Data to narrow it down to 3 states and years common between the two data sets
 #Also remove all, but the necessary columns
@@ -61,14 +66,6 @@ HeartData <-
 #Changes the Sample Size column to numeric variables
 HeartData$Sample_Size <- as.numeric(gsub(",", "", HeartData$Sample_Size))
 HeartData$Sample_Size <- as.numeric(as.character(HeartData$Sample_Size))
-```
-
-```{r}
-Age <- Heart_age$`Age Range`
-
-  if(Age == "18 to 24 Years"){
-    
-  }
 ```
 
 ```{r}
@@ -111,7 +108,7 @@ for(i in 1:length(HeartData$`Age Range`)){
 
 ```{r}
 #Function that makes the data longer by duplicating the number of rows by the value in the sample size column and making the data set have more rows.
-CasestoRows <- function(HeartData){
+HeartCasestoRows <- function(){
   Year <- vector()
   State <- vector()
   TopicType <- vector()
@@ -129,7 +126,25 @@ CasestoRows <- function(HeartData){
   df <- data.frame(Year, State, TopicType, TopicDesc, MeasureDesc, AgeRange)
   return(df)
 }
-Heart <- CasestoRows(HeartData)
+Heart <- HeartCasestoRows()
+```
+
+```{r}
+DeathCasestoRows <- function(){
+  Year <- vector()
+  State <- vector()
+  AgeRange <- vector()
+  Locality <- vector()
+  for (i in 1:length(DeathData$`Observed Deaths`)){
+    Year <- c(Year, rep(DeathData$Year[i], DeathData$`Observed Deaths`[i]))
+    State <- c(State, rep(DeathData$State[i], DeathData$`Observed Deaths`[i]))
+    Locality <- c(Locality, rep(DeathData$Locality[i], DeathData$`Observed Deaths`[i]))
+    AgeRange <- c(AgeRange, rep(DeathData$`Age Range`[i], DeathData$`Observed Deaths`[i]))
+  }
+  df <- data.frame(Year, State, Locality, AgeRange)
+  return(df)
+}
+Death <- DeathCasestoRows()
 ```
 
 ```{r}
@@ -139,3 +154,23 @@ Heart_age <-
 
 head(grep("[18]", Heart_age, value = TRUE))
 ```
+
+
+##Data Visualization
+
+```{r}
+
+```
+
+
+
+##Data Analysis
+
+```{r}
+
+```
+
+
+
+
+
