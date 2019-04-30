@@ -191,10 +191,30 @@ ggplot(Tobacco, aes(x = State)) +
 ##Data Analysis
 
 ```{r}
+HeartModelData <- HeartData
+for(i in 1:length(HeartModelData$`Age Range`)){
+  if(HeartModelData$`Age Range`[i] == "44 Years and Below"){
+    HeartModelData$`Age Range`[i] <- 0
+  }
+  else if(HeartModelData$`Age Range`[i] == "45 to 64 Years"){
+    HeartModelData$`Age Range`[i] <- 1
+  }
+  else if(HeartModelData$`Age Range`[i] == "65 Years and Older"){
+    HeartModelData$`Age Range`[i] <- 2
+  }
+}
+
+for(i in 1:length(HeartModelData$`Age Range`)){
+  if(HeartModelData$Locality[i] == "Nonmetropolitan"){
+    HeartModelData$Locality[i] <- 0
+  }
+  else if(HeartModelData$Locality[i] == "Metropolitan"){
+    HeartModelData$Locality[i] <- 1
+  }
+}
+
+linearMod <- lm(`Observed Deaths` ~ Locality + `Age Range`, data = HeartModelData)
+summary(linearMod)
 
 ```
-
-
-
-
 
