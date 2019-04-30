@@ -157,20 +157,8 @@ head(grep("[18]", Heart_age, value = TRUE))
 
 
 ##Data Visualization
-(A) Plot A uses both data sets.
-```{r}
-#Plot shows the count of people who currenlty smoke and have died from heart disease by age groups across Pennsylvania, Texas, and Washington.
-ggplot(TobaccoHeartTable, aes(x = MeasureDesc, y = n, fill = MeasureDesc)) + 
-  geom_boxplot() +
-  facet_wrap(~ AgeRange, ncol = 3) +
-  ggtitle("Number of people who currently smoke or have died from heart disease by age") +
-  labs(fill = "Condition") +
-  xlab("Condition") +
-  ylab("Count of people")
-```
 
-
-(B) Plot B uses 3 or more variables.
+#Data Wrangling for plots A and B.
 ```{r}
 #Select desired variables from Tobacco.
 Tobacco_Measure <- Tobacco %>%
@@ -202,6 +190,21 @@ TobaccoHeartTable <- TobaccoHeart %>%
   mutate(FrequencyByState = n / sum(n))
 ```
 
+
+(A) Plot A uses both data sets.
+```{r}
+#Plot shows the count of people who currenlty smoke and have died from heart disease by age groups across Pennsylvania, Texas, and Washington.
+ggplot(TobaccoHeartTable, aes(x = MeasureDesc, y = n, fill = MeasureDesc)) + 
+  geom_boxplot() +
+  facet_wrap(~ AgeRange, ncol = 3) +
+  ggtitle("Number of people who currently smoke or have died from heart disease by age") +
+  labs(fill = "Condition") +
+  xlab("Condition") +
+  ylab("Count of people")
+```
+
+
+(B) Plot B uses 3 or more variables.
 ```{r}
 #Plot the percentage of current smokers and heart disease of each state by year. 
 ggplot() + 
@@ -216,7 +219,7 @@ ggplot() +
 ```
 
 
-(C)
+(C) Any visualization
 ```{r}
 #Plot the count of current smokers by state across all years and all age groups 
 ggplot(Tobacco_Measure, aes(x = Year)) +
@@ -226,7 +229,7 @@ ggplot(Tobacco_Measure, aes(x = Year)) +
   ylab("Number of smokers")
 ```
 
-(D)
+(D) Any visualization
 ```{r}
 #Plot the count of heart disease deaths by state across all years and all age groups. 
  ggplot(Heart_Measure, aes(x = Year)) +
