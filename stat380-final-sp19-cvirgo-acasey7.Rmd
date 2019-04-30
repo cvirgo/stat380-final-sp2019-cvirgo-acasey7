@@ -59,7 +59,7 @@ HeartData <-
   Heart_Raw %>%
   dplyr::select(YEAR, LocationDesc, TopicType, TopicDesc, MeasureDesc, Sample_Size, Gender, Race, Age, Education) %>%
   setnames(old=c("YEAR","LocationDesc", "Age"), new=c("Year", "State", "Age Range")) %>%
-  filter(State %in% c("Pennsylvania", "Texas", "Washington", "Maryland",)) %>%
+  filter(State %in% c("Pennsylvania", "Texas", "Washington", "Maryland")) %>%
   filter(Year %in% c(2005, 2006, 2007, 2008, 2009, 2010))
 
 Rows1 <- HeartData$Gender=="Overall"
