@@ -17,6 +17,8 @@ library(data.table)
 library(stringr)
 library(ggplot2)
 library(tibble)
+library(klaR)
+library(Rmixmod)
 
 # loading in data
 Heart_Raw <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
@@ -271,4 +273,53 @@ linearMod <- lm(`Observed Deaths` ~ Locality + `Age Range`, data = HeartModelDat
 summary(linearMod)
 
 ```
+
+
+
+```{r}
+Heart_KData <- HeartData
+for(i in 1:length(Heart_KData$`Age Range`)){
+  if(Heart_KData$`Age Range`[i] == "44 Years and Below"){
+    Heart_KData$`Age Range`[i] <- 0
+  }
+  else if(Heart_KData$`Age Range`[i] == "45 to 64 Years"){
+    Heart_KData$`Age Range`[i] <- 1
+  }
+  else if(Heart_KData$`Age Range`[i] == "65 Years and Older"){
+    Heart_KData$`Age Range`[i] <- 2
+  }
+}
+
+for(i in 1:length(Heart_KData$Locality)){
+  if(Heart_KData$Locality[i] == "Nonmetropolitan"){
+    Heart_KData$Locality[i] <- 0
+  }
+  else if(Heart_KData$Locality[i] == "Metropolitan"){
+    Heart_KData$Locality[i] <- 1
+  }
+}
+
+for(i in 1:length(Heart_KData$State)){
+  if(Heart_KData$State[i] == "Pennsylvania"){
+    Heart_KData$State[i] <- 0
+  }
+  else if(Heart_KData$State[i] == "Texas"){
+    Heart_KData$State[i] <- 1
+  }
+  else if(Heart_KData$State[i] == "Washington"){
+    Heart_KData$State[i] <- 2
+  }
+}
+
+Heart_KData <-
+  Heart_KData %>%
+  select(`Age Range`, Locality, State)
+```
+
+```{r}
+K <- kmodes(Heart_KData, 5, iter.max = 10, weighted = FALSE)
+plot(Heart_KData[],col= K$cluster)
+```
+
+
 
