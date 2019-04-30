@@ -196,16 +196,16 @@ ggplot() +
            aes(y = FrequencyByState, x = Year, fill = MeasureDesc), 
            stat="identity",
            position='stack') +
-  theme_bw() + 
-  facet_grid(AgeRange ~ State)
+  theme_bw() +
+  facet_grid(AgeRange ~ State) +
+  labs(fill = "Condition") +
+  ggtitle("Percentage of current smokers and heart disease deaths by state from 2005 - 2010")
 ```
 
 (B)
 ```{r}
 # x = year, y = # of people with heart disease  ** between all four states
-ggplot(Tobacco_Measure, aes(x = Year)) +
-  geom_histogram(stat = "count") +
-    geom_bar()
+
 ```
 
 (C)
