@@ -157,8 +157,20 @@ head(grep("[18]", Heart_age, value = TRUE))
 
 
 ##Data Visualization
-
 (A) Plot A uses both data sets.
+```{r}
+#Plot shows the count of people who currenlty smoke and have died from heart disease by age groups across Pennsylvania, Texas, and Washington.
+ggplot(TobaccoHeartTable, aes(x = MeasureDesc, y = n, fill = MeasureDesc)) + 
+  geom_boxplot() +
+  facet_wrap(~ AgeRange, ncol = 3) +
+  ggtitle("Number of people who currently smoke or have died from heart disease by age") +
+  labs(fill = "Condition") +
+  xlab("Condition") +
+  ylab("Count of people")
+```
+
+
+(B) Plot B uses 3 or more variables.
 ```{r}
 #Select desired variables from Tobacco.
 Tobacco_Measure <- Tobacco %>%
@@ -173,9 +185,10 @@ Heart_Measure <- Heart %>%
 TobaccoHeart <- rbind(Tobacco_Measure, Heart_Measure)
 ```
 
-#Calculating percentages
-We did this so that our graphs aren't taken over by the large sample size of the Heart data set. If we don't use percentages, it would look like there were more individuals with heart disease in each state relative to their number of smokers. But in reality, the large number would just be because of the bigger sample. 
 ```{r}
+#Calculating percentages
+#We did this so that our graphs aren't taken over by the large sample size of the Heart data set. If we don't use percentages, it would look like there were more individuals with heart disease in each state relative to their number of smokers. But in reality, the large number would just be because of the bigger sample. 
+
 TobaccoHeartTable <- TobaccoHeart %>%
   #Count the number of unique rows.
   count(Year, State, MeasureDesc, AgeRange) %>%
@@ -202,26 +215,27 @@ ggplot() +
   ggtitle("Percentage of current smokers and heart disease deaths by state from 2005 - 2010")
 ```
 
-(B)
-```{r}
-# x = year, y = # of people with heart disease  ** between all four states
-
-```
 
 (C)
 ```{r}
-#Plot the count of current smokers by age group across all years and all states. 
+#Plot the count of current smokers by state across all years and all age groups 
 ggplot(Tobacco_Measure, aes(x = Year)) +
   geom_histogram(stat = "count") +
-  geom_bar(aes(fill = AgeRange))
+  geom_bar(aes(fill = State)) +
+  ggtitle("Number of current smokers by state between 2005 - 2010") +
+  ylab("Number of smokers")
 ```
 
 (D)
 ```{r}
-#Plot the count of heart disease deaths by age group across all years and all states. 
+#Plot the count of heart disease deaths by state across all years and all age groups. 
  ggplot(Heart_Measure, aes(x = Year)) +
   geom_histogram(stat = "count") +
-  geom_bar(aes(fill = AgeRange))
+  geom_bar(aes(fill = State)) +
+  ggtitle("Number of people who have died of heart disease by state between 2005 - 2010") +
+  labs(fill = "Condition") +
+  xlab("Condition") +
+  ylab("Count of people")
 ```
 
 
