@@ -10,13 +10,13 @@ output: html_notebook
 rm(list = ls())
 
 # loading packages
+library(plyr)
 library(mdsr)
 library(tidyr)
 library(data.table)
 library(stringr)
-library(dplyr)
 library(ggplot2)
-library(klaR)
+library(tibble)
 
 # loading in data
 Heart_Raw <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
