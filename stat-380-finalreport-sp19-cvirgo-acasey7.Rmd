@@ -199,15 +199,8 @@ ggplot() +
   theme_bw() + 
   facet_grid(AgeRange ~ State)
 ```
-<<<<<<< HEAD
-=======
 
-(B) 
-```{r}
-# x = year, y = # of people with heart disease  ** between all four states
->>>>>>> 974fe11c3178a21153b7d17310cef3c2fced35f3
 
-(B)
 ```{r}
 # x = year, y = # of people with heart disease  ** between all four states
 ggplot()
