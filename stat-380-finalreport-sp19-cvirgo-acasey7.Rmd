@@ -26,7 +26,7 @@ Tobacco_Raw <- fread("Behavioral_Risk_Factor_Data__Tobacco_Use__2010_And_Prior_.
 ```
 
 
-##Data Wrangling
+#Data Wrangling
 
 ```{r}
 #Filter the Smoking Data to narrow it down to 3 States and years common between the two data sets
@@ -154,13 +154,13 @@ Heart_age <-
   HeartData %>%
   select(`Age Range`)
 
-head(grep("[18]", Heart_age, value = TRUE))
+head(grep("[YEARS]", Heart_age, value = TRUE))
 ```
 
 
-##Data Visualization
+#Data Visualization
 
-#Data Wrangling for plots A and B.
+##Data Wrangling for plots A and B.
 ```{r}
 #Select desired variables from Tobacco.
 Tobacco_Measure <- Tobacco %>%
@@ -193,7 +193,7 @@ TobaccoHeartTable <- TobaccoHeart %>%
 ```
 
 
-(A) Plot A uses both data sets.
+###(A) Plot A uses both data sets.
 ```{r}
 #Plot shows the count of people who currenlty smoke and have died from heart disease by age groups across Pennsylvania, Texas, and Washington.
 ggplot(TobaccoHeartTable, aes(x = MeasureDesc, y = n, fill = MeasureDesc)) + 
@@ -206,7 +206,7 @@ ggplot(TobaccoHeartTable, aes(x = MeasureDesc, y = n, fill = MeasureDesc)) +
 ```
 
 
-(B) Plot B uses 3 or more variables.
+###(B) Plot B uses 3 or more variables.
 ```{r}
 #Plot the percentage of current smokers and heart disease of each state by year. 
 ggplot() + 
@@ -221,7 +221,7 @@ ggplot() +
 ```
 
 
-(C) Any visualization
+###(C) Any visualization
 ```{r}
 #Plot the count of current smokers by state across all years and all age groups 
 ggplot(Tobacco_Measure, aes(x = Year)) +
@@ -231,7 +231,7 @@ ggplot(Tobacco_Measure, aes(x = Year)) +
   ylab("Number of smokers")
 ```
 
-(D) Any visualization
+###(D) Any visualization
 ```{r}
 #Plot the count of heart disease deaths by state across all years and all age groups. 
  ggplot(Heart_Measure, aes(x = Year)) +
@@ -244,8 +244,9 @@ ggplot(Tobacco_Measure, aes(x = Year)) +
 ```
 
 
-##Data Analysis
+#Data Analysis
 
+##Supervised Learning and Simulation
 ```{r}
 HeartModelData <- HeartData
 for(i in 1:length(HeartModelData$`Age Range`)){
@@ -268,14 +269,14 @@ for(i in 1:length(HeartModelData$`Age Range`)){
     HeartModelData$Locality[i] <- 1
   }
 }
-
-linearMod <- lm(`Observed Deaths` ~ Locality + `Age Range`, data = HeartModelData)
-summary(linearMod)
-
 ```
 
+```{r}
+linearMod <- lm(`Observed Deaths` ~ Locality + `Age Range`, data = HeartModelData)
+summary(linearMod)
+```
 
-
+##Unsupervised Learning
 ```{r}
 Heart_KData <- HeartData
 for(i in 1:length(Heart_KData$`Age Range`)){
@@ -310,15 +311,17 @@ for(i in 1:length(Heart_KData$State)){
     Heart_KData$State[i] <- 2
   }
 }
-
-Heart_KData <-
-  Heart_KData %>%
-  select(`Age Range`, Locality, State)
 ```
 
 ```{r}
-K <- kmodes(Heart_KData, 5, iter.max = 10, weighted = FALSE)
-plot(Heart_KData[],col= K$cluster)
+Heart_KData <-
+  Heart_KData %>%
+  select(`Age Range`, Locality, State)
+
+KResults <- kmodes(Heart_KData, 10, iter.max = 10, weighted = FALSE)
+KResults
+
+plot(Heart_KData[],col= KResults$cluster)
 ```
 
 
