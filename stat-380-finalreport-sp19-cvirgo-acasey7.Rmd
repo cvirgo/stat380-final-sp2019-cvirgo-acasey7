@@ -10,11 +10,11 @@ output: html_notebook
 rm(list = ls())
 
 # loading packages
+library(plyr)
 library(mdsr)
 library(tidyr)
 library(data.table)
 library(stringr)
-library(plyr)
 library(ggplot2)
 library(tibble)
 
