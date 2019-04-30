@@ -16,6 +16,7 @@ library(data.table)
 library(stringr)
 library(dplyr)
 library(ggplot2)
+library(plyr)
 library(klaR)
 
 # loading in data
@@ -161,13 +162,35 @@ head(grep("[18]", Heart_age, value = TRUE))
 ```{r}
 # x = year, y = # of people with heart disease by tobacco use
 
-ggplot(Tobacco, aes(x = State)) +
-  geom_histogram(stat = "count")
+Heart2 <-
+  Heart %>%
+  dplyr::select(Year, State, AgeRange) 
+
+Heart2["MeasureDesc"] <- "Heart Disease"
+
+Tobacco2 <- 
+  Tobacco %>%
+ dplyr::select(Year, State, AgeRange, MeasureDesc)
+
+
+Measure <-
+  rbind(Heart2, Tobacco2)
+
+  
+  
+
+Tobacco$Year <- as.factor(Tobacco$Year)
+Heart$Year <- as.factor(Heart$Year)
+
+Tobacco <- as.data.frame(matrix(nrow = 276252, ncol = 6, dimnames = list(NULL, c("Year", "State"))))
+Heart <- as.data.frame(matrix(nrow = 1076451, ncol = 4, dimnames = list(NULL, c("Year", "State"))))
+
+Tobacco(as.factor(sample(2005:2010, size = nrow(Tobacco), replace = TRUE)))
 ```
 
 ```{r}
 # x = year, y = # of people with heart disease  ** between all four states
-
+ggplot()
 ```
 
 ```{r}
@@ -185,7 +208,6 @@ ggplot(Tobacco, aes(x = State)) +
   geom_histogram(stat = "count") +
   geom_bar(aes(fill = AgeRange))
 ```
-
 
 
 ##Data Analysis
