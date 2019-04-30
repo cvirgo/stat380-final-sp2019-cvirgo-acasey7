@@ -159,7 +159,31 @@ head(grep("[18]", Heart_age, value = TRUE))
 ##Data Visualization
 
 ```{r}
+# x = year, y = # of people with heart disease by tobacco use
 
+ggplot(Heart, aes(x = State)) +
+  geom_histogram(stat = "count")
+```
+
+```{r}
+# x = year, y = # of people with heart disease  ** between all four states
+
+```
+
+```{r}
+# DeathData: x = Age Range, y = # of heart disease
+
+ggplot(Heart, aes(x = Year)) +
+  geom_histogram(stat = "count") +
+  geom_bar(aes(fill = AgeRange))
+```
+
+```{r}
+#HeartData: x = year, y = multiple bar chart by state
+
+ggplot(Heart, aes(x = State)) +
+  geom_histogram(stat = "count") +
+  geom_bar(aes(fill = AgeRange))
 ```
 
 
