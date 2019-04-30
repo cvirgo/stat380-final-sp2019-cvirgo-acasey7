@@ -14,10 +14,9 @@ library(mdsr)
 library(tidyr)
 library(data.table)
 library(stringr)
-library(dplyr)
-library(ggplot2)
 library(plyr)
-library(klaR)
+library(ggplot2)
+library(tibble)
 
 # loading in data
 Heart_Raw <- fread("NCHS_-_Potentially_Excess_Deaths_from_the_Five_Leading_Causes_of_Death.csv")
@@ -159,40 +158,55 @@ head(grep("[18]", Heart_age, value = TRUE))
 
 ##Data Visualization
 
+(A) Plot A uses both data sets.
 ```{r}
-# x = year, y = # of people with heart disease by tobacco use
+#Select desired variables from Tobacco.
+Tobacco_Measure <- Tobacco %>%
+  select(Year, State, MeasureDesc, AgeRange)
 
-Heart2 <-
-  Heart %>%
-  dplyr::select(Year, State, AgeRange) 
-
-Heart2["MeasureDesc"] <- "Heart Disease"
-
-Tobacco2 <- 
-  Tobacco %>%
- dplyr::select(Year, State, AgeRange, MeasureDesc)
-
-
-Measure <-
-  rbind(Heart2, Tobacco2)
-
+#Adding a measure descriptor variable and selecting desired variables from Heart.
+Heart_Measure <- Heart %>%
+  add_column(MeasureDesc = "Heart Disease") %>%
+  select(Year, State, MeasureDesc, AgeRange)
   
-  
-
-Tobacco$Year <- as.factor(Tobacco$Year)
-Heart$Year <- as.factor(Heart$Year)
-
-Tobacco <- as.data.frame(matrix(nrow = 276252, ncol = 6, dimnames = list(NULL, c("Year", "State"))))
-Heart <- as.data.frame(matrix(nrow = 1076451, ncol = 4, dimnames = list(NULL, c("Year", "State"))))
-
-Tobacco(as.factor(sample(2005:2010, size = nrow(Tobacco), replace = TRUE)))
+#Bind the two datasets together.
+TobaccoHeart <- rbind(Tobacco_Measure, Heart_Measure)
 ```
 
+#Calculating percentages
+We did this so that our graphs aren't taken over by the large sample size of the Heart data set. If we don't use percentages, it would look like there were more individuals with heart disease in each state relative to their number of smokers. But in reality, the large number would just be because of the bigger sample. 
+```{r}
+TobaccoHeartTable <- TobaccoHeart %>%
+  #Count the number of unique rows.
+  count(Year, State, MeasureDesc, AgeRange) %>%
+  #Split momentarily into Tobacco and Heart again.
+  group_by(MeasureDesc) %>%
+  #Find the percentage of each unique "grouping" within each original dataset.
+  mutate(Frequency = n / sum(n)) %>% 
+  #Split into Tobacco and Heart but this time also split by state.
+  group_by(MeasureDesc, State) %>%
+  #Find the percentage of each grouping relative to the state it belongs to in the original dataset.
+  mutate(FrequencyByState = n / sum(n))
+```
+
+```{r}
+#Plot the percentage of current smokers and heart disease of each state by year. 
+ggplot() + 
+  geom_bar(data=TobaccoHeartTable, 
+           aes(y = FrequencyByState, x = Year, fill = MeasureDesc), 
+           stat="identity",
+           position='stack') +
+  theme_bw() + 
+  facet_grid(AgeRange ~ State)
+```
+
+(B)
 ```{r}
 # x = year, y = # of people with heart disease  ** between all four states
 ggplot()
 ```
 
+(C)
 ```{r}
 # DeathData: x = Age Range, y = # of heart disease
 
@@ -201,6 +215,7 @@ ggplot(Tobacco, aes(x = Year)) +
   geom_bar(aes(fill = AgeRange))
 ```
 
+(D)
 ```{r}
 #HeartData: x = year, y = multiple bar chart by state
 
