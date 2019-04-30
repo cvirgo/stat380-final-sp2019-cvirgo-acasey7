@@ -203,23 +203,23 @@ ggplot() +
 (B)
 ```{r}
 # x = year, y = # of people with heart disease  ** between all four states
-ggplot()
+ggplot(Tobacco_Measure, aes(x = Year)) +
+  geom_histogram(stat = "count") +
+    geom_bar()
 ```
 
 (C)
 ```{r}
-# DeathData: x = Age Range, y = # of heart disease
-
-ggplot(Tobacco, aes(x = Year)) +
+#Plot the count of current smokers by age group across all years and all states. 
+ggplot(Tobacco_Measure, aes(x = Year)) +
   geom_histogram(stat = "count") +
   geom_bar(aes(fill = AgeRange))
 ```
 
 (D)
 ```{r}
-#HeartData: x = year, y = multiple bar chart by state
-
-ggplot(Tobacco, aes(x = State)) +
+#Plot the count of heart disease deaths by age group across all years and all states. 
+ ggplot(Heart_Measure, aes(x = Year)) +
   geom_histogram(stat = "count") +
   geom_bar(aes(fill = AgeRange))
 ```
