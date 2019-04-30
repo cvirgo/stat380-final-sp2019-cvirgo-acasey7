@@ -200,7 +200,7 @@ ggplot() +
   facet_grid(AgeRange ~ State)
 ```
 
-
+(B)
 ```{r}
 # x = year, y = # of people with heart disease  ** between all four states
 ggplot()
