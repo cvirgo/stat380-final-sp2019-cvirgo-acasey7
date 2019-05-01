@@ -306,13 +306,14 @@ sims
 
 ### Unsupervised Learning
 ```{r}
+#Selecting data to use in clusters
 HeartModelData <-
   HeartModelData %>%
   select(`Age Range`, Locality, State)
-
+#Using kmodes technique to cluster data
 KResults <- kmodes(HeartModelData, 10, iter.max = 10, weighted = FALSE)
 KResults
-
+#Plotting kmodes clusters to get a clear visualization on the data
 plot(HeartModelData[],col= KResults$cluster)
 ```
 
