@@ -248,6 +248,7 @@ ggplot(Tobacco_Measure, aes(x = Year)) +
 
 ### Supervised Learning and Simulation
 ```{r}
+#Changes the categorical variables to quantitative so we can do a linear regression model.
 HeartModelData <- HeartData
 for(i in 1:length(HeartModelData$`Age Range`)){
   if(HeartModelData$`Age Range`[i] == "44 Years and Below"){
@@ -269,6 +270,7 @@ for(i in 1:length(HeartModelData$`Age Range`)){
     HeartModelData$Locality[i] <- 1
   }
 }
+
 for(i in 1:length(HeartModelData$State)){
   if(HeartModelData$State[i] == "Pennsylvania"){
     HeartModelData$State[i] <- 0
@@ -283,11 +285,13 @@ for(i in 1:length(HeartModelData$State)){
 ```
 
 ```{r}
+#Multiple Linear Regression model coefficients
 linearMod <- lm(`Observed Deaths` ~ Locality + `Age Range`, data = HeartModelData)
 summary(linearMod)
 ```
 
 ```{r}
+#Final Simulation of the multiple linear regression model made above.
 n <- 1000
 x1 <- runif(n, min = 0, max = 1)
 x2 <- runif(n, min = 0, max = 2)
