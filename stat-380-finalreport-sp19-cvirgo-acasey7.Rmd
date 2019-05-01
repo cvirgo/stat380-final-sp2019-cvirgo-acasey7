@@ -248,7 +248,7 @@ ggplot(Tobacco_Measure, aes(x = Year)) +
 
 # Data Analysis
 
-### Supervised Learning and Simulation
+### Supervised Learning
 ```{r}
 #Changes the categorical variables to quantitative so we can do a linear regression model.
 HeartModelData <- HeartData
@@ -292,6 +292,7 @@ linearMod <- lm(`Observed Deaths` ~ Locality + `Age Range`, data = HeartModelDat
 summary(linearMod)
 ```
 
+### Simulation
 ```{r}
 #Final Simulation of the multiple linear regression model made above.
 n <- 1000
