@@ -29,19 +29,19 @@ Lines 31-71
 
 (B) .Rmd Line number(s) for a spread & gather (or equivalent): 
 
-Lines 111-150
+Lines 111-151
 
 (C) .Rmd Line number(s) for use of regular expressions: 
 
-Lines 152-158
+Lines 153-160
 
 (D) .Rmd Line number(s) for use of user-defined functions: 
 
-Lines 111-150
+Lines 111-151
 
 (E) .Rmd Line number(s) for use of loops and/or control flow: 
 
-Lines 73-150
+Lines 73-151
 
 (F) .Rmd Line number(s) for use of vectorized functions: 
 
